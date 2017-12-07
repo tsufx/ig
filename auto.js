@@ -9,7 +9,7 @@ const User = [
 	{
 		type:'input',
 		name:'username',
-		message:'Username lu',
+		message:'Username lu :',
 		validate: function(value){
 			if(!value) return 'Can\'t Empty';
 			return true;
@@ -18,7 +18,7 @@ const User = [
 	{
 		type:'password',
 		name:'password',
-		message:'Passwordnya',
+		message:'Passwordnya :',
 		mask:'*',
 		validate: function(value){
 			if(!value) return 'Can\'t Empty';
@@ -28,7 +28,7 @@ const User = [
 	{
 		type:'input',
 		name:'target',
-		message:' Username Targetnya (gapake @ )',
+		message:' Username Targetnya (gapake @ ):',
 		validate: function(value){
 			if(!value) return 'Can\'t Empty';
 			return true;
@@ -37,7 +37,7 @@ const User = [
 	{
 		type:'input',
 		name:'text',
-		message:'Komen yg ingin disampekeun =',
+		message:'Komen yg ingin disampekeun :',
 		validate: function(value){
 			if(!value) return 'Can\'t Empty';
 			return true;
@@ -46,7 +46,7 @@ const User = [
 	{
 		type:'input',
 		name:'sleep',
-		message:'Insert Sleep (In MiliSeconds)',
+		message:'Waktu Limitnya :',
 		validate: function(value){
 			value = value.match(/[0-9]/);
 			if (value) return true;
@@ -81,7 +81,7 @@ const Target = async function(username){
 	try{
 		const account = await rp(option);
 		if (account.user.is_private) {
-			return Promise.reject('Igehnya KePrivate brok Mending Follow Tsufx');
+			return Promise.reject('Igehnya KePrivate brok ');
 		} else {
 			const id = account.user.id;
 			const followers = account.user.followed_by.count;
@@ -167,13 +167,13 @@ const Followers = async function(session, id){
 
 const Excute = async function(User, TargetUsername, Text, Sleep){
 	try {
-		console.log(chalk`{yellow \n | Try to Login .....}`)
+		console.log(chalk`{yellow \n | coba Login..}`)
 		const doLogin = await Login(User);
-		console.log(chalk`{green  | Login Succsess, try to get Followers Target ....}`)
+		console.log(chalk`{green  | Berhasil nih, dapetin followersnya dia dulu....}`)
 		const getTarget = await Target(TargetUsername);
 		console.log(chalk`{green  | ${TargetUsername}[${getTarget.id}] Followers: ${getTarget.followers}}`)
 		const getFollowers = await Followers(doLogin.session, doLogin.account.id)
-		console.log(chalk`{cyan  | Try to Follow, Comment, and Like Followers Target ... \n}`)
+		console.log(chalk`{cyan  | Sabar coba dijalanin scriptnya ... \n}`)
 		const Targetfeed = new Client.Feed.AccountFollowers(doLogin.session, getTarget.id);
 		var TargetCursor;
 		do {
@@ -203,8 +203,9 @@ const Excute = async function(User, TargetUsername, Text, Sleep){
 }
 
 console.log(chalk`
-{bold Instagram PELER}
+{bold Instagram Follow Followers Target}
 {bold.blue TsuCode.net - Tsufx - OjekOnlen}
+{bold.grey Jangan Lupa Follow Instagram @Tsufx}
 {bold.red Code By TsuFx}
 `);
 
