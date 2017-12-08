@@ -91,7 +91,7 @@ const Following = async function(session, id){
 const Unfollow = async function(session, accountId){
 	try {
 		await Client.Relationship.destroy(session, accountId);
-		return chalk`{bold.green SUKSES}`;
+		return chalk`{bold.green Terlupakan}`;
 	} catch (err){
 		return chalk`{bold.red GAGAL}`;
 	}
@@ -101,7 +101,7 @@ const Excute = async function(User,sleep){
 	try {
 		console.log(chalk`\n{yellow [?] Try to Login ....}`);
 		const doLogin = await Login(User);
-		console.log(chalk`{green [+] Login Succsess}, {yellow Try to get Followers and Following ....}`);
+		console.log(chalk`{green | Login Successs .....}, {yellow Try to get Followers and Following ....}`);
 		const task = [
 			Followers(doLogin.session, doLogin.account.id),
 			Following(doLogin.session, doLogin.account.id)
@@ -114,7 +114,7 @@ const Excute = async function(User,sleep){
 				await AccountToUnfollow.push(account);
 			}
 		}));
-		console.log(chalk`{blue  | Account To Unfollow : ${AccountToUnfollow.length}}`)
+		console.log(chalk`{blue  | Orang Sombong : ${AccountToUnfollow.length}}`)
 		AccountToUnfollow = _.chunk(AccountToUnfollow, 10);
 		for (let i = 0; i < AccountToUnfollow.length; i++) {
 			await Promise.all(AccountToUnfollow[i].map(async(akun) => {
